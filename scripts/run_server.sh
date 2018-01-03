@@ -2,6 +2,6 @@
 cd /var/www/pottypatrol
 echo $PWD
 
-npm build
+ng build
 
-node server/server.js $
+pm2 start server/server.js 

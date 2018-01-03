@@ -6,3 +6,4 @@ source ~/.profile
 
 npm i -g npm
 npm i -g @angular/cli@latest
+npm i -g pm2

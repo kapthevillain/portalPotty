@@ -21,3 +21,11 @@ hooks:
     - location: scripts/install_packages.sh
       timeout: 300
       runas: ec2-user
+  ApplicationStart:
+    - location: scripts/run_server.sh
+      timeout: 120
+      runas: ec2-user
+  ApplicationStop:
+    - location: scripts/stop_server.sh
+      timeout: 120
+      runas: ec2-user
