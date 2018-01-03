@@ -4,14 +4,14 @@ files:
   - source: /
     destination: /var/www/pottypatrol
 permissions:
-  - object: /var/www/pottypatrol
+  - object: /tmp/pottypatrol
     pattern: "**"
     owner: ec2-user
     group: ec2-user
-  - object: /var/www/pottypatrol/scripts
-    pattern: "*.sh"
+  - object: /tmp/pottypatrol/scripts
+    pattern: "**"
     owner: ec2-user
-    mode: 755
+    mode: 777
 hooks:
   BeforeInstall:
     - location: scripts/install_dependencies.sh
@@ -29,3 +29,4 @@ hooks:
     - location: scripts/stop_server.sh
       timeout: 120
       runas: ec2-user
+
