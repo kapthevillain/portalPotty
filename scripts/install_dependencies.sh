@@ -1,3 +1,8 @@
 #!/bin/bash
+mkdir ~/.npm-global
+npm config set prefix '~/.npm-global'
+export PATH=~/.npm-global/bin:$PATH
+source ~/.profile
+
 npm i -g npm
 npm i -g @angular/cli@latest
