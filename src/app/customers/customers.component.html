@@ -1,0 +1,23 @@
+<div class="row">
+    <table class="table table-bordered table-hover table-striped col-md-4" style="width: auto">
+        <thead>
+            <tr>
+                <th>Company</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr *ngFor="let cust of customers">
+                    <td>
+                        {{cust.company}}
+                        <a (click)="onSelect(cust)" class="btn btn-sm btn-secondary"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+                        <a href="/events/<%= event.slug %>/edit" class="btn btn-sm btn-secondary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                        <a href="/events/<%= event.slug %>/delete" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+
+    <div class="col-md-4">
+        <app-cust-detail [cust]="selectedCustomer"></app-cust-detail>
+    </div>
+</div>

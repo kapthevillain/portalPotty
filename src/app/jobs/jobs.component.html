@@ -1,0 +1,41 @@
+<p>
+  jobs works!
+</p>
+<div class="container">
+    <div class="row" >
+        <!-- <div class="list-group">
+            <ul class="list-group-item list-group-item-action" style="list-style: none;">
+                <li class="">
+                    <h4 class="card-title">{{j.jobname}}</h4>
+                </li>
+                <li class="">
+                    <h6 class="card-title">{{j.company}}</h6>
+                </li>
+                <button name="{{j.jobid}}" class="btn btn-primary" (click)="onSelect(cust)" >See Details</button>
+            </ul>
+        </div> -->
+        <table class="table table-bordered table-hover table-striped col-md-4" style="width: auto">
+            <thead >
+                <tr>
+                    <!-- <th >Job Name</th> -->
+                    <th>Jobs</th>
+                    <!-- <th></th> -->
+                </tr>
+            </thead>
+            <tbody>
+                    <tr *ngFor="let j of jobs$ | async" [class.selected]="j.id === selectedJobId">
+                        <!-- <td>{{cust.jobname}}</td> -->
+                        <!-- <td></td> -->
+                        <td>
+                            {{j.jobname}}
+                            <a [routerLink]="['/jobs', j.jobid]" class="btn btn-sm btn-secondary"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+                            <!-- <a (click)="goToJob(j)" class="btn btn-sm btn-secondary"><i class="fa fa-info-circle" aria-hidden="true"></i></a> -->
+                            <!-- <a href="/events/<%= event.slug %>/edit" class="btn btn-sm btn-secondary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                            <a href="/events/<%= event.slug %>/delete" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a> -->
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- <app-cust-detail [j]="selectedCustomer"></app-cust-detail> -->
+</div>

@@ -1,0 +1,94 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<!-- <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyB-NMWUNyZMe8i-1Twvn8UVXByuaZuGqFw'></script> -->
+<body>
+    <!-- header -->
+
+    <!-- <header id="site-header">
+        <div class="navbar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <a routerLink="/dashboard" class="navbar-brand pull-right">505 Portable Restrooms</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a routerLink="/customers">Customers</a></li>
+                    <li><a routerLink="/jobs">Jobs</a></li>
+                    <li><a routerLink="/pottys">Pottys</a></li>
+                </ul>
+            </div>
+        </div>
+    </header> -->
+    <div class="row">
+        <div class="wrapper">
+            <div class="col-md-2">
+                <!-- (mouseenter)="toggleMenu()" (mouseleave)="toggleMenu()" -->
+                <div id="sidebar" class="">
+                    <!-- Sidebar Header -->
+                    <!-- <div class="sidebar-header">
+                        <h3>Potty Patrol</h3>
+                    </div> -->
+
+                    <!-- Sidebar Links -->
+                    <!-- Sidebar Links -->
+                    <ul class="list-unstyled components">
+                        <li routerLinkActive="active">
+                            <a routerLink="/dashboard" >
+                                <i class="fa fa-dashboard fa-3" id="sidebar__menuitem-1"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li routerLinkActive="active">
+                            <a routerLink="/customers">
+                                <i class="fa fa-building fa-3" id="sidebar__menuitem-2"></i>
+                                Companies
+                            </a>
+                            <!-- routerLink="/jobs" -->
+                        </li>
+                        <li routerLinkActive="active">
+                            <a routerLink="/jobs">
+                                <i class="fa fa-briefcase" id="sidebar__menuitem-3"></i>
+                                Jobs
+                            </a>
+                        </li>
+                        <li routerLinkActive="active">
+                            <a routerLink="/pottys">
+                                <i class="fa fa-cubes fa-3" id="sidebar__menuitem-4"></i>
+                                Potties
+                            </a>
+                        </li>
+                    </ul>
+                    <a (click)="toggleMenu()" class="fa fa-plus-square-o fa-3"></a>
+                </div>
+                <div id="subsidebar" (transitionend)="transitionEnd($event)" >
+                    <div class="subsidebar-header hidden">Quick Add</div>
+                    <!-- <a (click)="open(content)" class="btn btn-success navbar__quickadd--button hidden">&#10133; Add Job</a> -->
+                    <app-add-job></app-add-job>
+                    <!-- <a (click)="toggleCompanyCreate()" class="btn btn-success navbar__quickadd--button hidden">&#10133; Add Company</a> -->
+                    <app-add-company></app-add-company>
+                </div>
+            </div>
+
+        </div>
+
+        <main id='site-main' class="col-md-10">
+            <div class="container main-container--width">
+                <router-outlet></router-outlet>
+            </div>
+
+        </main>
+
+    </div>
+    <!-- main -->
+    <!-- <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title">Modal title</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>One fine body&hellip;</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+        </div>
+    </ng-template> -->

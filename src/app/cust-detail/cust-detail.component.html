@@ -1,0 +1,11 @@
+<div *ngIf="cust">
+      <h2>{{cust.company}} details!</h2>
+      <div><label>id: </label>{{cust.cid}}</div>
+      <div><label>name: </label>{{cust.name}}</div>
+      <div><label>email: </label>{{cust.email}}</div>
+</div>
+<div *ngFor="let j of jobss">
+    <div>{{j.jobid}}</div>
+    <div>{{j.jobname}}</div>
+    <div></div>
+</div>

@@ -1,0 +1,12 @@
+<div *ngIf="showAvailablePottys">
+  available-pottys works!
+  <div class='container' [dragula]="pottys" [dragulaModel]="availablePottys">
+      <div *ngFor="let pot of availablePottys">
+          <strong>id:</strong> {{pot.pottyid}} <br>
+          <strong>Condition:</strong> {{pot.condition}} <br>
+          <strong>Last pumped:</strong> {{pot.lastpump | date}} <br>
+          <hr>
+      </div>
+
+  </div>
+</div>

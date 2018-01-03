@@ -1,0 +1,187 @@
+body{
+    font: 16px;
+    line-height: 1.5;
+}
+
+/*header*/
+#site-header .navbar {
+    border-radius: 0;
+    border: none;
+    margin: 0;
+    background: #222;
+    color: #999;
+}
+
+.main-container--width {
+    margin-left: 0;
+}
+
+.wrapper {
+    /*display: flex;
+    align-items: stretch;*/
+}
+
+/*main section*/
+#site-main{
+    padding: 50px 0px;
+}
+
+#sidebar {
+    /* margin-left: 10px; */
+}
+#subsidebar.active {
+    /*min-width: 200px;*/
+    max-width: 200px;
+    min-height: 100vh;
+    left: 80px;
+}
+#sidebar, #subsidebar {
+    min-width: 80px;
+    max-width: 80px;
+    min-height: 100vh;
+    text-align: center;
+}
+
+#subsidebar.active {
+    /*margin-left: -250px;*/
+}
+
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #fafafa;
+}
+
+p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1em;
+    font-weight: 300;
+    line-height: 1.7em;
+    color: #999;
+}
+
+a, a:hover, a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+#sidebar, #subsidebar {
+    /* don't forget to add all the previously mentioned styles here too */
+    /*#7386D5;*/
+    color: #fff;
+    transition: all 0.3s;
+}
+#sidebar {
+    position: absolute;
+    z-index: 2;
+    background: #4b2c20;
+}
+#subsidebar {
+    position: relative;
+    z-index: 1;
+    background: #a98274;
+}
+
+#sidebar .sidebar-header, #subsidebar .subsidebar-header {
+    padding: 20px;
+    background: #a98274;
+}
+
+#sidebar ul.components, #subsidebar ul.components {
+    padding: 20px 0;
+    /*border-bottom: 1px solid #47748b;*/
+}
+
+#sidebar ul p, #subsidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    padding: 25px 10px 25px 10px;
+    font-size: 1.1em;
+    display: block;
+}
+#sidebar ul li a:hover {
+    color: #4b2c20;
+    background: #fff;
+}
+
+#sidebar ul li.active > a, a[aria-expanded="true"] {
+    color: #fff;
+    background: #795548;
+}
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #4b2c20;
+}
+
+/* Shrinking the sidebar from 250px to 80px and center aligining its content*/
+/*#subsidebar.active {
+    min-width: 80px;
+    max-width: 80px;
+    text-align: center;
+}*/
+
+/* Toggling the sidebar header content, hide the big heading [h3] and showing the small heading [strong] and vice versa*/
+#subsidebar.active .sidebar-header strong {
+    display: none;
+}
+#sidebar .sidebar-header h3, #subsidebar .sidebar-header h3 {
+    display: none;
+}
+#sidebar .sidebar-header strong, #subsidebar .sidebar-header strong {
+    display: block;
+}
+
+#subsidebar.active ul li a{
+    /*text-align: left;*/
+}
+
+#sidebar ul li a {
+    padding: 20px 10px;
+    text-align: center;
+    font-size: 0.75em;
+}
+
+#sidebar ul li a i {
+    margin-right:  0;
+    display: block;
+    font-size: 1.8em;
+    margin-bottom: 5px;
+}
+
+/* Same dropdown links padding*/
+#sidebar ul ul a, #subsidebar ul ul a {
+    padding: 10px !important;
+}
+
+/* Changing the arrow position to bottom center position,
+   translateX(50%) works with right: 50%
+   to accurately  center the arrow */
+#sidebar a[aria-expanded="false"]::before, #sidebar a[aria-expanded="true"]::before {
+    top: auto;
+    bottom: 5px;
+    right: 50%;
+    transform: translateX(50%);
+}
+#subsidebar a[aria-expanded="false"]::before, #subsidebar a[aria-expanded="true"]::before {
+    top: auto;
+    bottom: 5px;
+    right: 50%;
+    transform: translateX(50%);
+}
+
+.fa-plus-square-o {
+    font-size: 25px;
+}
+
+.hidden {
+    display: none;
+}

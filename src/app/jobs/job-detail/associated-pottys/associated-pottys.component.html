@@ -1,0 +1,17 @@
+<p>
+  associated-pottys works!
+</p>
+<div class="grey-back">
+    <div class="container" [dragula]="pottys" [dragulaModel]="associatedPottys">
+        <div *ngFor="let pot of associatedPottys">
+            <strong>id:</strong> {{pot.pottyid}} <br>
+            <strong>Condition:</strong> {{pot.condition}} <br>
+            <strong>Last pumped:</strong> {{pot.lastpump | date}} <br>
+            <hr>
+        </div>
+
+    </div>
+<!-- <div *ngIf="pottys"><p>Its: {{pottys}}</p></div> -->
+<button (click)="toggleAvailablePottys()" class="btn btn-success pull-right">&#10133; Add Potty</button>
+</div>
+<app-available-pottys [showAvailablePottys]="showAvailablePottys"></app-available-pottys>

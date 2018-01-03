@@ -1,0 +1,54 @@
+<!-- <div *ngIf="showAddJob">
+  <div class="row add-job__background">
+      <form *ngIf="job"  #jobform="ngForm" >
+          <p>Create a new Job</p>
+          <div class="col-md-6 add-company--label_text"><label for="">Job Name<input type="text" class="form-control" [(ngModel)]="job.jobname" name="jobname"></label></div>
+          <div class="col-md-3 add-company--label_text"><label for="">Start Date<input type="text" class="form-control" [(ngModel)]="job.startdate" name="startdate"></label></div>
+          <div class="col-md-3 add-company--label_text"><label for="">End Date<input type="text" class="form-control" [(ngModel)]="job.enddate" name="enddate"></label></div>
+          <div class="col-md-6 add-company--label_text"><label for="">Address<input type="text" class="form-control" [(ngModel)]="job.address" name="address"></label></div>
+          <div class="col-md-5 add-company--label_text"><label for="">Phone Number<input type="text" class="form-control" [(ngModel)]="job.phone" name="phone"></label></div>
+          <div class="col-md-5 add-company--label_text"><label for="">Company</label>
+              <select  class="form-control" [(ngModel)]="job.company" name="company" (focus)="getCustomers()">
+                  <option value="" disabled>Choose a Company</option>
+                  <option *ngFor="let cust of customers" [value]="cust.company" ngDefaultControl>{{cust.company}}</option>
+              </select>
+          </div>
+          <div class="add-job__create-button"><button (click)="createJob(job)" class="btn btn-success">Create</button></div>
+      </form>
+  </div>
+</div> -->
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Add Job</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Add jobs body&hellip;</p>
+    <form #jobform="ngForm" >
+        <p>Create a new Job</p>
+
+         <div class="add-company--label_text">
+             <label for="">Job Name<input type="text" name="jobname" ></label>
+             <!-- <label for="">Job Name<input type="text" class="form-control" [(ngModel)]="job.jobname" name="jobname"></label> -->
+         </div>
+        <!-- <div class="add-company--label_text"><label for="">Start Date<input type="text" class="form-control" [(ngModel)]="job.startdate" name="startdate"></label></div>
+        <div class="add-company--label_text"><label for="">End Date<input type="text" class="form-control" [(ngModel)]="job.enddate" name="enddate"></label></div>
+        <div class="add-company--label_text"><label for="">Address<input type="text" class="form-control" [(ngModel)]="job.address" name="address"></label></div>
+        <div class="add-company--label_text"><label for="">Phone Number<input type="text" class="form-control" [(ngModel)]="job.phone" name="phone"></label></div>
+        <div class="add-company--label_text"><label for="">Company</label>
+            <select  class="form-control" [(ngModel)]="job.company" name="company" (focus)="getCustomers()">
+                <option value="" disabled>Choose a Company</option>
+                <option *ngFor="let cust of customers" [value]="cust.company" ngDefaultControl>{{cust.company}}</option>
+            </select>
+        </div>
+        <div class="add-job__create-button"><button (click)="createJob(job)" class="btn btn-success">Create</button></div> -->
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>
+
+<a (click)="open(content)" class="btn btn-success navbar__quickadd--button hidden">&#10133; Add Job</a>

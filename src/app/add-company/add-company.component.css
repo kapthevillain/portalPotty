@@ -1,0 +1,19 @@
+.add-company_background {
+    background-color: lightgrey;
+    border-radius: 5px;
+    width:75%;
+    /*height: 100%;*/
+}
+
+.add-company--create-button {
+    float: right;
+    padding: 20px;
+}
+
+.add-company--label_text {
+    font-size: 12px;
+}
+
+.hidden {
+    display: none;
+}

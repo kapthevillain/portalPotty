@@ -1,0 +1,16 @@
+<p>
+  job-detail works!
+</p>
+<div *ngIf="job$ | async as job">
+    <h3>{{job.jobname}}</h3>
+    <div>
+        <p>Start: {{job.startdate | date}}</p>
+        <p>End: {{job.enddate | date}}</p>
+        <p>{{job.company}}</p>
+        <p>{{job.address}}</p>
+    </div>
+    <app-associated-pottys [job]="job"></app-associated-pottys>
+</div>
+<!-- <div class=""> -->
+    <!-- <app-associated-pottys [job]="job"></app-associated-pottys> -->
+<!-- </div> -->

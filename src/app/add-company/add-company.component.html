@@ -1,0 +1,30 @@
+<!-- <div *ngIf="showAddCompany">
+  <div class="row add-company_background">
+      <form *ngIf="company"  #custform="ngForm" >
+          <p>Create a new Company</p>
+          <div class="col-md-6 add-company--label_text"><label for="">Company Name<input type="text" class="form-control" [(ngModel)]="company.company" name="jobname"></label></div>
+          <div class="col-md-3 add-company--label_text"><label for="">Person of contact<input type="text" class="form-control" [(ngModel)]="company.name" name="startdate"></label></div>
+          <div class="col-md-3 add-company--label_text"><label for="">Email<input type="text" class="form-control" [(ngModel)]="company.email" name="enddate"></label></div>
+          <div class="col-md-5 add-company--label_text"><label for="">Phone Number<input type="text" class="form-control" [(ngModel)]="company.phone" name="phone"></label></div>
+          <div class="add-company--create-button"><button (click)="createCompany(company)" class="btn btn-success">Create</button></div>
+      </form>
+  </div>
+</div> -->
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Add Company</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Add company body&hellip;</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>
+
+<!-- <a (click)="open(content)" class="btn btn-success navbar__quickadd--button hidden">&#10133; Add Job</a> -->
+<a (click)="open(content)" class="btn btn-success navbar__quickadd--button hidden">&#10133; Add Company</a>
