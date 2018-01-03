@@ -1,5 +1,5 @@
 #!/bin/bash
-echo pwd
+echo $PWD
 cd /var/www/pottypatrol
-echo pwd
+echo $PWD
 npm install
