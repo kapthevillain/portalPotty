@@ -2,7 +2,7 @@ var dynamo = require("dynamodb");
 var Joi = require("joi");
 const AWS = require('aws-sdk');
 
-dynamo.AWS.config.loadFromPath('server/config.json');
+//dynamo.AWS.config.loadFromPath('server/config.json');
 dynamo.AWS.config.update({region: "us-west-2"});
 
 var Potty = dynamo.define("Potty", {
