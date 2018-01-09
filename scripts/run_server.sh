@@ -2,6 +2,8 @@
 cd /var/www/pottypatrol
 echo $PWD
 
-ng build
+su - ec2-user -c "/home/ec2-user/.nvm/versions/node/v9.3.0/bin/ng build"
+#ng build
 
-pm2 start server/server.js 
+su - ec2-user -c "/home/ec2-user/.nvm/versions/node/v9.3.0/bin/pm2 start server/server.js"
+#pm2 start server/server.js 
