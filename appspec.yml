@@ -11,9 +11,6 @@ permissions:
     type:
       - directory
       - file
-  - object: /var/www/pottypatrol/scripts
-    pattern: "**"
-    owner: root
     mode: 755
 hooks:
   BeforeInstall:
