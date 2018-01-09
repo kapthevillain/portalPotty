@@ -2,4 +2,5 @@
 echo $PWD
 cd /var/www/pottypatrol
 echo $PWD
-sudo npm install
+su - ec2-user -c "/home/ec2-user/.nvm/versions/node/v9.3.0/bin/npm install"
+#sudo npm install
