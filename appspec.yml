@@ -28,5 +28,5 @@ hooks:
   ApplicationStop:
     - location: scripts/stop_server.sh
       timeout: 120
-      runas: root
+      runas: ec2-user 
 
