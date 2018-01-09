@@ -1,9 +1,8 @@
 #!/bin/bash
-mkdir ~/.npm-global
-npm config set prefix '~/.npm-global'
-export PATH=~/.npm-global/bin:$PATH
-source ~/.profile
 
-npm i -g npm
-npm i -g @angular/cli@latest
-npm i -g pm2
+su - ec2-user -c "/home/ec2-user/.nvm/versions/node/v9.3.0/bin/npm i -g npm"
+# npm i -g npm
+su - ec2-user -c "/home/ec2-user/.nvm/versions/node/v9.3.0/bin/npm i -g @angular\/cli@latest"
+# npm i -g @angular\/cli@latest
+su - ec2-user -c "/home/ec2-user/.nvm/versions/node/v9.3.0/bin/npm i -g pm2"
+
