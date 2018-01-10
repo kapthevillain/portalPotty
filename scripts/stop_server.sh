@@ -5,6 +5,6 @@
 doesAppExist='pgrep nginx'
 if [[ -n $doesAppExist ]]; then
 	service nginx stop
-	pm2 stop all
+#	pm2 stop all
 fi
 
