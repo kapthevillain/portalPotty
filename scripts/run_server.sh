@@ -2,6 +2,8 @@
 cd /var/www/pottypatrol
 echo $PWD
 
+sudo aws s3 cp s3://ppatrol/potty_nginx.conf /etc/nginx/conf.d/
+
 # Start services
 sudo service nginx start
 
