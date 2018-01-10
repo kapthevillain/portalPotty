@@ -8,3 +8,4 @@ sudo su - ec2-user -c "/home/ec2-user/.nvm/versions/node/v9.3.0/bin/npm i -g @an
 # npm i -g @angular\/cli@latest
 sudo su - ec2-user -c "/home/ec2-user/.nvm/versions/node/v9.3.0/bin/npm i -g pm2"
 
+sudo yum -y install nginx
