@@ -4,7 +4,7 @@
 #cd /var/www/pottypatrol
 doesAppExist='pgrep nginx'
 if [[ -n $doesAppExist ]]; then
-	service nginx stop
+	sudo service nginx stop
 #	pm2 stop all
 fi
 
