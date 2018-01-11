@@ -63,8 +63,6 @@ app.get("*", function(req, res, next){
 
 });
 
-
-
 // start our server
 app.listen(port, () => {
     console.log('App listening on http://localhost:' + port);
