@@ -1,0 +1,440 @@
+AWSTemplateFormatVersion: 2010-09-09
+Parameters:
+  VpcId:
+    Type: 'AWS::EC2::VPC::Id'
+    Description: VpcId of your existing Virtual Private Cloud (VPC)
+    ConstraintDescription: must be the VPC Id of an existing Virtual Private Cloud.
+  Subnets:
+    Type: 'List<AWS::EC2::Subnet::Id>'
+    Description: The list of SubnetIds in your Virtual Private Cloud (VPC)
+    ConstraintDescription: >-
+      must be a list of at least two existing subnets associated with at least
+      two different availability zones. They should be residing in the selected
+      Virtual Private Cloud.
+  SSHKey:
+    Description: Name of an existing EC@ KeyPair to enable SSH access to the instances
+    Type: 'AWS::EC2::KeyPair::KeyName'
+    ConstraintDescription: must be the name of an existing EC2 KeyPair.
+  SSHLocation:
+    Description: 'Lockdown SSH access '
+    Type: String
+    MinLength: '9'
+    MaxLength: '18'
+    Default: 0.0.0.0/0
+    AllowedPattern: '(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})/(\d{1,2})'
+    ConstraintDescription: must be a valid CIDR range of the form x.x.x.x/x.
+  MinInstances:
+    Description: Min number of instances in scaling group
+    Type: Number
+    Default: 1
+  MaxInstances:
+    Description: Max number of instances in scaling group
+    Type: Number
+    Default: 1
+  DesiredInstances:
+    Description: Desired number of instances to exist in scaling group
+    Type: Number
+    Default: 1
+  SourceRepoName:
+    Type: String
+    Description: CodeCommit repository from which to retrieve code
+    Default: pottyRepo
+  SourceRepoBranch:
+    Type: String
+    Description: CodeCommit repository branch from which to retrieve code
+    Default: master
+  ApplicationName:
+    Type: String
+    Description: Name of application that is deployed
+    Default: PottyApplicationCF
+  PipelineName:
+    Type: String
+    Description: Name of Pipeline that is created
+    Default: PottyPipelineDEV
+Metadata:
+  'AWS::CloudFormation::Designer':
+    2b547d70-b8d2-4d4b-b9c3-049a53345c93:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 450
+        'y': 90
+      z: 1
+      embeds: []
+      isassociatedwith:
+        - 93d63141-00af-4045-9147-02d002fc1bbf
+    93d63141-00af-4045-9147-02d002fc1bbf:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 540
+        'y': 90
+      z: 1
+      embeds: []
+      isassociatedwith:
+        - 8380b58f-de3c-4927-aa56-9a10cbc6b32a
+    8380b58f-de3c-4927-aa56-9a10cbc6b32a:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 540
+        'y': 220
+      z: 1
+      embeds: []
+    8c2de476-580e-4458-9480-6c2388497c90:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 260
+        'y': 50
+      z: 1
+      embeds: []
+      isassociatedwith:
+        - 2b547d70-b8d2-4d4b-b9c3-049a53345c93
+        - c83fe2a3-6b87-4c3b-938c-8413aec01765
+        - 8daea387-8cb0-4b8c-8348-6ebc68e36388
+    c83fe2a3-6b87-4c3b-938c-8413aec01765:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 110
+        'y': 60
+      z: 1
+      embeds: []
+    8daea387-8cb0-4b8c-8348-6ebc68e36388:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 260
+        'y': 210
+      z: 1
+      embeds: []
+    efebe0c1-14b2-4622-9732-b166c56b6076:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 410
+        'y': -70
+      z: 1
+      embeds: []
+    c2ce76f3-4955-42c5-be11-92e6657aa6b2:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 110
+        'y': -150
+      z: 1
+      embeds: []
+    84a25f8f-f657-401b-bfd6-053921174369:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 520
+        'y': -70
+      z: 0
+      embeds: []
+      dependson:
+        - efebe0c1-14b2-4622-9732-b166c56b6076
+    f4ef5209-f17a-4439-8c45-8050ce646228:
+      source:
+        id: 8c2de476-580e-4458-9480-6c2388497c90
+        selector: 'g:nth-child(1) g:nth-child(4) g:nth-child(4) circle:nth-child(1)     '
+        port: 'AWS::DependencyLink-*'
+      target:
+        id: efebe0c1-14b2-4622-9732-b166c56b6076
+      z: 3
+    6f76a75f-a3fd-4b6b-bcef-2ba09db685f9:
+      source:
+        id: 8c2de476-580e-4458-9480-6c2388497c90
+        selector: 'g:nth-child(1) g:nth-child(4) g:nth-child(4) circle:nth-child(1)     '
+        port: 'AWS::DependencyLink-*'
+      target:
+        id: efebe0c1-14b2-4622-9732-b166c56b6076
+      z: 3
+Resources:
+  AutoScalingGroup:
+    Type: 'AWS::AutoScaling::AutoScalingGroup'
+    Properties:
+      VPCZoneIdentifier: !Ref Subnets
+      LaunchConfigurationName: !Ref LaunchConfig
+      MinSize: !Ref MinInstances
+      MaxSize: !Ref MaxInstances
+      DesiredCapacity: !Ref DesiredInstances
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 2b547d70-b8d2-4d4b-b9c3-049a53345c93
+  LaunchConfig:
+    Type: 'AWS::AutoScaling::LaunchConfiguration'
+    Properties:
+      AssociatePublicIpAddress: 'true'
+      ImageId: ami-32cf7b4a
+      KeyName: !Ref SSHKey
+      InstanceType: t2.micro
+      IamInstanceProfile: !GetAtt InstanceProfile.Arn
+      SecurityGroups:
+        - Ref: InstanceSecurityGroup
+      UserData: !Base64
+        'Fn::Join':
+          - ''
+          - - '#!/bin/bash'
+            - |+
+
+            - sudo yum update
+            - |+
+
+            - sudo yum update aws-cfn-bootstrap
+            - |+
+
+            - 'sudo /opt/aws/bin/cfn-init -v '
+            - '         --stack '
+            - !Ref 'AWS::StackName'
+            - '         --resource LaunchConfig '
+            - '         --region '
+            - !Ref 'AWS::Region'
+            - '         --configsets mainSet'
+            - |+
+
+            - 'sudo /opt/aws/bin/cfn-signal -e $? '
+            - '         --stack '
+            - !Ref 'AWS::StackName'
+            - '         --resource LaunchConfig '
+            - '         --region '
+            - !Ref 'AWS::Region'
+            - |+
+
+            - sudo service codedeploy-agent start
+            - ''
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 93d63141-00af-4045-9147-02d002fc1bbf
+      'AWS::CloudFormation::Init':
+        configSets:
+          mainSet:
+            - InstallNode
+            - InstallCodeDeployAgent
+        InstallNode:
+          commands:
+            InstallNode01:
+              command: >-
+                su - ec2-user -c "curl -o-
+                https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh
+                | bash"
+            InstallNode02:
+              command: whoami
+            InstallNode03:
+              command: >-
+                curl -o-
+                https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh
+                | bash
+            InstallNode07:
+              command: >-
+                [ -s "/home/ec2-user/.nvm/nvm.sh" ] && \.
+                "/home/ec2-user/.nvm/nvm.sh"\
+            InstallNode08:
+              command: >-
+                [ -s "/home/ec2-user/.nvm/bash_completion" ] && \.
+                "/home/ec2-user/.nvm/bash_completion"
+            InstallNode04:
+              command: . /home/ec2-user/.nvm/nvm.sh
+            InstallNode05:
+              command: whoami
+            InstallNode09:
+              command: su - ec2-user -c "nvm install node"
+        InstallCodeDeployAgent:
+          packages:
+            yum:
+              ruby: []
+              wget: []
+          commands:
+            CodeDeployAgent01:
+              command: cd /home/ec2-user
+            CodeDeployAgent02:
+              command: >-
+                su - ec2-user -c "wget
+                https://aws-codedeploy-us-west-2.s3.amazonaws.com/latest/install"
+            CodeDeployAgent03:
+              command: su - ec2-user -c "chmod +x ./install"
+            CodeDeployAgent04:
+              command: su - ec2-user -c "sudo ./install auto"
+  InstanceSecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: Enable HTTP and SSH access to application instances
+      VpcId: !Ref VpcId
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: '8080'
+          ToPort: '8080'
+          CidrIp: !Ref SSHLocation
+        - IpProtocol: tcp
+          FromPort: '22'
+          ToPort: '22'
+          CidrIp: !Ref SSHLocation
+        - IpProtocol: tcp
+          FromPort: '80'
+          ToPort: '80'
+          CidrIp: !Ref SSHLocation
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 8380b58f-de3c-4927-aa56-9a10cbc6b32a
+  Pipeline:
+    Type: 'AWS::CodePipeline::Pipeline'
+    Properties:
+      RoleArn: !GetAtt PipelineRole.Arn
+      ArtifactStore:
+        Type: S3
+        Location: codepipeline-us-west-2-552778902750
+      Stages:
+        - Name: Source
+          Actions:
+            - InputArtifacts: []
+              Name: Source
+              ActionTypeId:
+                Category: Source
+                Owner: AWS
+                Version: '1'
+                Provider: CodeCommit
+              OutputArtifacts:
+                - Name: MyApp
+              Configuration:
+                BranchName: master
+                RepositoryName:
+                  Ref: SourceRepoName
+              RunOrder: 1
+        - Name: Staging
+          Actions:
+            - InputArtifacts:
+                - Name: MyApp
+              Name: PottyDeploymentGroup
+              ActionTypeId:
+                Category: Deploy
+                Owner: AWS
+                Version: '1'
+                Provider: CodeDeploy
+              Configuration:
+                ApplicationName:
+                  Ref: ApplicationDeployment
+                DeploymentGroupName:
+                  Ref: DeploymentGroup
+              RunOrder: 1
+      Name: !Ref PipelineName
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: c2ce76f3-4955-42c5-be11-92e6657aa6b2
+  PipelineRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - ec2.amazonaws.com
+                - codedeploy.amazonaws.com
+                - codepipeline.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      Path: /
+      Policies:
+        - PolicyName: pipeline-service-role
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Action:
+                  - 'dynamodb:*'
+                Resource: 'arn:aws:dynamodb:*'
+                Effect: Allow
+              - Action:
+                  - 'autoscaling:*'
+                  - 'ec2:*'
+                  - 'lambda:*'
+                  - 'codedeploy:*'
+                  - 'elasticloadbalancing:*'
+                  - 'cloudformation:GetTemplate'
+                  - 'cloudformation:DescribeStackResource'
+                  - 'cloudformation:DescribeStackResources'
+                  - 'cloudformation:DescribeStackEvents'
+                  - 'cloudformation:DescribeStacks'
+                  - 'cloudformation:UpdateStack'
+                  - "iam:AddRoleToInstanceProfile"
+                  - "iam:CreateInstanceProfile"
+                  - "iam:CreateRole"
+                  - "iam:DeleteInstanceProfile"
+                  - "iam:DeleteRole"
+                  - "iam:DeleteRolePolicy"
+                  - "iam:GetInstanceProfile"
+                  - "iam:GetRole"
+                  - "iam:GetRolePolicy"
+                  - "iam:ListInstanceProfilesForRole"
+                  - "iam:ListRolePolicies"
+                  - "iam:ListRoles"
+                  - "iam:PassRole"
+                  - "iam:PutRolePolicy"
+                  - "iam:RemoveRoleFromInstanceProfile"
+                  - 'sns:ListSubscriptionsByTopic'
+                Resource: '*'
+                Effect: Allow
+              - Action:
+                  - 's3:*'
+                Resource: '*'
+                Effect: Allow
+              - Action:
+                  - 'codecommit:GetBranch'
+                  - 'codecommit:GetCommit'
+                  - 'codecommit:UploadArchive'
+                  - 'codecommit:GetUploadArchiveStatus'
+                  - 'codecommit:CancelUploadArchive'
+                Resource: '*'
+                Effect: Allow
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: efebe0c1-14b2-4622-9732-b166c56b6076
+  InstanceProfile:
+    Type: 'AWS::IAM::InstanceProfile'
+    Properties:
+      Roles:
+        - !Ref PipelineRole
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 84a25f8f-f657-401b-bfd6-053921174369
+    DependsOn:
+      - PipelineRole
+  DeploymentGroup:
+    Type: 'AWS::CodeDeploy::DeploymentGroup'
+    Properties:
+      AutoScalingGroups:
+        - !Ref AutoScalingGroup
+      ApplicationName: !Ref ApplicationDeployment
+      ServiceRoleArn: !GetAtt PipelineRole.Arn
+      DeploymentConfigName: !Ref DeploymentConfig
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 8c2de476-580e-4458-9480-6c2388497c90
+    DependsOn:
+      - PipelineRole
+  ApplicationDeployment:
+    Type: 'AWS::CodeDeploy::Application'
+    Properties:
+      ApplicationName: !Ref ApplicationName
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: c83fe2a3-6b87-4c3b-938c-8413aec01765
+  DeploymentConfig:
+    Type: 'AWS::CodeDeploy::DeploymentConfig'
+    Properties:
+      MinimumHealthyHosts:
+        Type: HOST_COUNT
+        Value: 0
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 8daea387-8cb0-4b8c-8348-6ebc68e36388

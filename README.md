@@ -2,6 +2,8 @@
 PottyPatrol
 This program is the poop.
 
+Use Node 8.11.4
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.2.
 
 ## Development server
