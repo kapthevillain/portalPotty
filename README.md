@@ -1,7 +1,12 @@
 # Pottypatrol
-PottyPatrol
-This program is the poop.
-This app is designed to help businesses that own portable restrooms. The Potty company can add restrooms, maintain statuses of pottys, add companies that rent the pottys, add job/jobsites of where the companies need the toliets to be, and a map of all the pottys and their statuses. This application uses AWS Services like DynamoDb, Cloudformation, and contains a template.yml file for building CI/CD pipeline via CloudFormation.
+PottyPatrol.
+
+## About
+This app is designed to help businesses that own portable restrooms. The Potty company can add restrooms, maintain statuses of pottys, add companies that rent the pottys, add job/jobsites of where the companies need the toliets to be, and a map of all the pottys and their statuses. This application uses AWS Services like DynamoDB, S3, and contains a template.yml file and deplyoment scripts for building a CI/CD pipeline for this app via CloudFormation.
+
+## Technologies
+The API is built with NodeJs, Express and DynamoDB.
+The front-end is built with Angular4 with Typescript.
 
 Use Node 8.11.4
 
